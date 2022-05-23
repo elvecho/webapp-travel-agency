@@ -1,0 +1,21 @@
+﻿@using webapp_travel_agency.Models
+@model Pacchetto
+<div class = "container" >
+	<div class= "row">
+		<div class = "col col-12 ">
+			<div>
+				<h1> dettagli pizza </h1>
+				<div>
+				<img src = "@Model.Image" />
+				</div>
+
+			</div>
+			<p>
+				nome pizza: @Model.Title
+			</p>
+			<p> ingredienti: @Model.Description</p>
+		</div>
+
+	</div>
+</div>
+

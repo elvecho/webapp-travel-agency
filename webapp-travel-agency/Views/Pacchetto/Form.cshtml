@@ -1,0 +1,43 @@
+﻿@using webapp_travel_agency.Models
+@model Pacchetto
+
+<div class ="container">
+	<div class="row">
+<div class ="col 12">
+	<h1 class ="mt-3 mb-3 ">Nuovo Pacchetto Viaggi</h1>
+
+
+<form method ="post" action= "@Url.Action("Create", "Pacchetto" )">
+	@Html.AntiForgeryToken()
+	<div class = "mb-3 ">
+		immagine:
+		<input asp-for = "Image" class=" d-block w-100" />
+		<span asp-validation-for = "Image" class = "text-danger "></span>
+
+	</div>
+	<div class = "mb-3 ">
+		nome:
+		<input asp-for = "Title" class=" d-block w-100" />
+		<span asp-validation-for = "Title" class = "text-danger"></span>
+</div>
+
+<div class = "mb-3 ">
+		contenuto:
+		<textarea asp-for = "Description" class=" d-block w-100"></textarea>
+		<span asp-validation-for = "Description" class = "text-danger"></span>
+		</div>
+
+<div class = "mb-3 ">
+		prezzo:
+		<textarea asp-for = "Prezzo" class=" d-block w-100"></textarea>
+		<span asp-validation-for = "Prezzo" class = "text-danger"></span>
+		</div>
+
+		<div class = "text-end">
+			<input type="submit" class="btn btn-primary " value = "salva">
+		</div>
+</form>
+
+</div>
+</div>
+</div>
