@@ -15,8 +15,17 @@
     <title>hello world</title>
 </head>
 <body>
+
      <div class="container container-fluid">
         <div class="row pt-4">
+            <div class="col-12">
+                <form asp-controller="Pacchetto" asp-action="Index" method="get">
+                    <p>
+                        Ricerca: <input type="text" name="SearchString" />
+                        <input type="submit" value="Filter" />
+                    </p>
+                </form>
+            </div>
             <div class="col text-center">
                 <h1>Our amazing tour</h1>
                 <p class="text-secondary"> lorE ipsum dolor sit amet, consectetur adipiscing elit.fusce ex lacus, ullamcorper id tincidunt in,fermentum finibus orci. phasellus placerat aliquet metus scelerisque convallis</p>

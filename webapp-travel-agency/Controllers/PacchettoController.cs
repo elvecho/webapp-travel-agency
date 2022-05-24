@@ -7,13 +7,21 @@ namespace webapp_travel_agency.Controllers
     public class PacchettoController : Controller
     {
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(string SearchString)
         {
             List<Pacchetto> pacchetti = new List<Pacchetto>();
 
+          
             using (PacchettoContext db = new PacchettoContext())
             {
-                pacchetti = db.pacchetti.ToList<Pacchetto>();
+                if (SearchString != null)
+                {
+                    pacchetti = db.pacchetti.Where(pacchetti => pacchetti.Title.Contains(SearchString) || pacchetti.Description.Contains(SearchString)).ToList<Pacchetto>();
+                }
+                else
+                {
+                    pacchetti = db.pacchetti.ToList<Pacchetto>();
+                }
             }
             return View("HomePage", pacchetti);
         }

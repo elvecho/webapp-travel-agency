@@ -5,24 +5,42 @@
 
 <div class = "align-items-center">
 <h1>lista Pacchetti viaggio</h1>
+<div>
+	<input id="search_input" type="text" class="js_search form-control" placeholder="cerca...">	
 </div>
+</div>
+
 <div class = "row js_no_pacchetti text-center">
 	<div class ="col-12">
 		<h3>non ci sono pacchetti viaggio</h3>
 	</div>
 </div>
-<div class ="row js_pacchetti_table">
+<div class ="row js_pacchetti_table" id="pacchetto-div">
 
 </div>
 
 @section Scripts{
 	<script type ="text/javascript">
 
-		loadPacchetti();
+		document.getElementById("search_input").addEventListener('keypress', searchIteams);
 
-	function loadPacchetti(){
 
-		axios.get('/API/Pacchetto').then((result) => {
+		searchIteams();
+
+		function searchIteams(){
+			var inputText = document.getElementById('search_input').value
+			loadPacchetti(inputText);
+
+		}
+
+	function loadPacchetti(searchParameter){
+		document.getElementById("pacchetto-div").innerHTML = '';
+
+		axios.get('/API/Pacchetto',{
+			params : {
+				search : searchParameter
+			}
+		}).then((result) => {
 			console.log("ho ricevuto i pacchetti") //codice che verrà eseguito quando arrivano i dati dalla web api
 
 			if(result.data.length == 0){
@@ -36,10 +54,11 @@
 					`
 				<div class= "col-12 col-md-4 p-2">
 				   <div class="card">
-                   <img class="card-img-top" src="${Pacchetto.image}" alt="${Pacchetto.Description}">
+                   <img class="card-img-top" src="${Pacchetto.image}" alt="${Pacchetto.description}">
                    <div class="card-body">
                    <h5 class="card-title">${Pacchetto.title}</h5>
                    <p class="card-text">${Pacchetto.description}</p>
+				   <p class="card-text">${Pacchetto.prezzo}€/persona</p>
                    
                    </div>
                    </div>

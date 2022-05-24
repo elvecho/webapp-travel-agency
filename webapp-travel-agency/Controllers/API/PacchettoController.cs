@@ -10,13 +10,21 @@ namespace webapp_travel_agency.Controllers.API
     public class PacchettoController : ControllerBase
     {
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(string? search)
         {
             List<Pacchetto> pacchetti = new List<Pacchetto>();
 
+
             using (PacchettoContext db = new PacchettoContext())
             {
-                pacchetti = db.pacchetti.ToList<Pacchetto>();
+                if (search != null && search != "")
+                {
+                    pacchetti = db.pacchetti.Where(pacchetti => pacchetti.Title.Contains(search) || pacchetti.Description.Contains(search)).ToList<Pacchetto>();
+                }
+                else
+                {
+                    pacchetti = db.pacchetti.ToList<Pacchetto>();
+                }
             }
             return Ok(pacchetti);
         }
