@@ -27,6 +27,9 @@
     href= "@Url.Action("Create", "Pacchetto")">
     nuovo Pacchetto Viaggio 
 </a>
+<div>
+    <hr>
+</div>
 @if( Model.Count() == 0)
     {
                     <h3> non ci sono Pacchetti presenti :C</h3>
@@ -46,7 +49,7 @@
                                 <div class="card mx-auto container-fluid" style="width: 100%; height:100% ">
                                  <img class="card-img-top" src="@PacchettoNellaLista.Image"  alt="cabin">
                                  <div class= "card-body">
-                                <div class="card-title border border-warning  bg-warning text-aligh text-center text-white">
+                                <div class="card-title border border-success  bg-success text-aligh text-center text-white">
                                     <h4>@PacchettoNellaLista.Title</h4></div>
                                 <div class="card-text text-center shadow mb-5 bg-body rounded">
                                     <p class="card-text fw-light">@PacchettoNellaLista.Description</p>

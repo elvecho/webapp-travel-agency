@@ -1,10 +1,55 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1>benvenuto nel mio sito</h1>
+
+
+<div class = "align-items-center">
+<h1>lista Pacchetti viaggio</h1>
+</div>
+<div class = "row js_no_pacchetti text-center">
+	<div class ="col-12">
+		<h3>non ci sono pacchetti viaggio</h3>
+	</div>
+</div>
+<div class ="row js_pacchetti_table">
+
 </div>
 
+@section Scripts{
+	<script type ="text/javascript">
 
+		loadPacchetti();
+
+	function loadPacchetti(){
+
+		axios.get('/API/Pacchetto').then((result) => {
+			console.log("ho ricevuto i pacchetti") //codice che verrà eseguito quando arrivano i dati dalla web api
+
+			if(result.data.length == 0){
+				document.querySelector('.js_pacchetti_table').classList.add('d-none');
+
+			}else{
+				document.querySelector('.js_no_pacchetti').classList.add('d-none');
+
+				result.data.forEach(Pacchetto => {
+					document.querySelector('.js_pacchetti_table').innerHTML +=
+					`
+				<div class= "col-12 col-md-4 p-2">
+				   <div class="card">
+                   <img class="card-img-top" src="${Pacchetto.image}" alt="${Pacchetto.Description}">
+                   <div class="card-body">
+                   <h5 class="card-title">${Pacchetto.title}</h5>
+                   <p class="card-text">${Pacchetto.description}</p>
+                   
+                   </div>
+                   </div>
+					`
+					
+				});
+			}
+		}).catch((error) => {
+			console.log("c è stato un errore: " + error);
+		});
+	}
+	</script>
+}
